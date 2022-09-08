@@ -21,7 +21,6 @@
 
 
 <body>
-    {{-- @can('admin') --}}
     <div id="app">
         <div id="main">
 
@@ -38,8 +37,9 @@
 
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('dist/js/lightbox-plus-jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
-    {{-- @endcan --}}
+
 
 </body>
 

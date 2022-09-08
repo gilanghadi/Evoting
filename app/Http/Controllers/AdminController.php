@@ -131,7 +131,8 @@ class AdminController extends Controller
     public function dataPemilih()
     {
         return view('admin.pemilih', [
-            'pemilih' => User::with(['calons'])->get()
+            'pemilih' => User::where('role', User::ROLE_USER)->with(['calons'])->get(),
+            ''
         ]);
     }
 

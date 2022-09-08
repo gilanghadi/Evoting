@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VotingController;
 use App\Http\Controllers\Api\VotingController as ApiVotingController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,13 @@ use App\Http\Controllers\Api\VotingController as ApiVotingController;
 */
 Auth::routes();
 
-// Route::middleware('auth')->group(function(){
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function(){
+    Route::get('/', HomeController::class . '@index')->name('home');
     Route::get('/vote/{id}', VotingController::class . '@vote')->name('vote');
-// });
+});
 
-// Route::prefix('admin')->middleware(['auth', 'admin'])->group(function(){
-    Route::get('/admin', AdminController::class . '@index')->name('admin.home');
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function(){
+    Route::get('/', AdminController::class . '@index')->name('admin.home');
     Route::get('/calon', AdminController::class . '@calon')->name('admin.calon');
     Route::post('/addCalon', AdminController::class . '@addCalon')->name('admin.addcalon');
     Route::get('/deletecalon/{id}', AdminController::class . '@deleteCalon')->name('admin.deletecalon');
@@ -39,4 +40,4 @@ Auth::routes();
     Route::get('/resetPemilih/{id}/{id_calon}', AdminController::class . '@resetPemilih')->name('admin.resetPemilih');
     Route::get('/deletePemilih/{id}', AdminController::class . '@deletePemilih')->name('admin.deletePemilih');
     Route::get('/kelas', AdminController::class . '@dataKelas')->name('admin.kelas');
-// });
+});

@@ -77,7 +77,7 @@
                                     <img src="{{ url('/foto_calon/' . $k->foto_calon) }}" class="card-img-top"
                                         alt="...">
                                     <div class="card-body text-center">
-                                        <h5 class="mt-3" id="vote{{ $k->id }}"></h5>
+                                        <h5 class="mt-3" id="vote{{ $k->id }}">Suara</h5>
                                     </div>
                                 </div>
                             </div>
@@ -120,81 +120,4 @@
     </section>
     <script src="{{ asset('assets/js/pages/apexcharts.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script>
-        var options = {
-            series: [
-                @foreach ($kandidat as $k)
-                    {{ $k->suara }},
-                @endforeach
-            ],
-            labels: [
-                @foreach ($kandidat as $k)
-                    '{{ $k->nama_ketua }} & {{ $k->nama_wakil }}',
-                @endforeach
-            ],
-            colors: ["#435ebe", "#55c6e8", "#FEB139", "#EB1D36"],
-            chart: {
-                type: "donut",
-                width: "100%",
-                height: "350px"
-            },
-            legend: {
-                position: "bottom"
-            },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        size: "30%"
-                    }
-                }
-            },
-        };
-        var chart = new ApexCharts(document.querySelector("#voting"), options);
-        chart.render();
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.totalSuara') }}',
-                success: function(data) {
-                    @foreach ($kandidat as $k)
-                        $('#vote{{ $k->id }}').html(data[{{ $k->id - 1 }}].suara +
-                            ' Suara');
-                    @endforeach
-                    chart.updateSeries([
-                        @foreach ($kandidat as $k)
-                            data[{{ $k->id - 1 }}].suara,
-                        @endforeach
-                    ]);
-                }
-            });
-        }, 1000);
-        const number = [0, 1, 2, 3]
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.pemilihTerkini') }}',
-                success: function(data) {
-                    for (let el of number) {
-                        $('#namapemlih' + [el]).html(data[el].user.nama);
-                        $('#kelaspemilih' + [el]).html(data[el].user.kelas);
-                        if (el === 3) {
-                            break;
-                        }
-                    }
-                }
-            });
-        }, 1000);
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.sudahMemilih') }}',
-                success: function(data) {
-                    $('#sudahmemilih').html(data);
-                }
-            });
-        }, 1000);
-    </script>
 @endsection
