@@ -15,7 +15,7 @@
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input id="nis" type="number"
                             class="form-control form-control-xl @error('nis') is-invalid @enderror" name="nis"
-                            value="{{ old('nis') }}" required autocomplete="nis" autofocus placeholder="Nis">
+                            value="{{ old('nis') }}" required autocomplete="nis" autofocus placeholder="nis | nip">
                         @error('nis')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -15,10 +15,9 @@ class VotingController extends Controller
 
     $user = User::where('id', $request->user()->id)->value('voting');
 
-
-    if ($user == "false") {
+    if (!$user) {
       User::where('id', $request->user()->id)->update([
-        'voting' => "true",
+        'voting' => 1,
         'id_calon' => $id
       ]);
 

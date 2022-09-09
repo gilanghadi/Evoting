@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_ketua');
             $table->string('nama_wakil');
-            $table->string('foto_calon', 100);
+            $table->string('foto_calon');
             $table->text('visi');
             $table->text('misi');
             $table->integer('suara')->default(0);

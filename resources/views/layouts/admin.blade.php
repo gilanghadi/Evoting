@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/pages/datatables.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.png') }}" type="image/png">
-
     <link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
 
 </head>
@@ -39,8 +38,9 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('dist/js/lightbox-plus-jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

@@ -132,7 +132,6 @@ class AdminController extends Controller
     {
         return view('admin.pemilih', [
             'pemilih' => User::where('role', User::ROLE_USER)->with(['calons'])->get(),
-            ''
         ]);
     }
 

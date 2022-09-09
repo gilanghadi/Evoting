@@ -11,7 +11,7 @@ class VotingController extends Controller
 {
     public function getSuara()
     {
-        $totalSuara = Calons::all();
+        $totalSuara = Calons::where('voting', 0);
         return response()->json($totalSuara);
     }
 

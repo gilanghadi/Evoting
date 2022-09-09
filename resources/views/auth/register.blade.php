@@ -18,10 +18,9 @@
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">Masukan Data Pemilih</h4>
                 <div>
-                    <button type="button" class="btn btn-primary c" data-bs-toggle="modal" data-bs-target="#importExcel">
-                        IMPORT EXCEL
-                    </button>
-                    <a href="{{-- {{-- {{ route('admin.downloadTemplate') }} --}} --}}" class="btn icon icon-left btn-success"><svg
+                    <button data-bs-toggle="modal" data-bs-target="#importExcel" class="btn btn-primary">IMPORT
+                        EXCEL</button>
+                    <a href="{{ route('admin.downloadTemplate') }}" class="btn icon icon-left btn-success"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-download">

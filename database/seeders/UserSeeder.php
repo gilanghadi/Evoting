@@ -17,16 +17,8 @@ class UserSeeder extends Seeder
     {
         //
         $user = new User();
-        $user->nama = 'gilang';
-        $user->nis = '11111';
-        $user->kelas = 'rpl';
-        $user->role = 'user';
-        $user->password = bcrypt('12345');
-        $user->save();
-        
-        $user = new User();
-        $user->nama = 'gilang';
-        $user->nis = '22222';
+        $user->nama = 'Gilang Hadi';
+        $user->nis = '206883';        
         $user->kelas = ' ';
         $user->role = 'admin';
         $user->password = bcrypt('12345');

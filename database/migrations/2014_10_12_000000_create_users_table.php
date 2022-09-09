@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nis')->unique();
             $table->string('kelas');
-            $table->string('voting')->default(false);
+            $table->integer('voting')->default(0);
             $table->foreignId('id_calon')->nullable();
             $table->string('password');
             $table->string('role')->default(User::ROLE_USER);
