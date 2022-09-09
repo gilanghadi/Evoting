@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
         $user->kelas = ' ';
         $user->role = 'admin';
         $user->password = bcrypt('12345');
+        $user->voting = 2;
         $user->save();
     }
 }

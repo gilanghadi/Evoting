@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <h6 class="text-muted font-semibold">Sudah Memilih</h6>
-                                    <h6 class="font-extrabold mb-0" id="sudahmemilih"></h6>
+                                    <h6 class="font-extrabold mb-0" id="sudahmemilih">{{ $sudahMemilih }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -68,16 +68,16 @@
                         Hasil Voting
                     </h1>
                     <div class="row mt-2 justify-content-center">
-                        @foreach ($kandidat as $k)
+                        @foreach ($calons as $c)
                             <div class="col-sm-4">
                                 <div class="card shadow-lg">
                                     <div class="card-header text-center fw-bold">
-                                        {{ $k->nama_ketua }} & {{ $k->nama_wakil }}
+                                        {{ $c->nama_ketua }} & {{ $c->nama_wakil }}
                                     </div>
-                                    <img src="{{ url('/foto_calon/' . $k->foto_calon) }}" class="card-img-top"
+                                    <img src="{{ url('/foto_calon/' . $c->foto_calon) }}" class="card-img-top"
                                         alt="...">
                                     <div class="card-body text-center">
-                                        <h5 class="mt-3" id="vote{{ $k->id }}">Suara</h5>
+                                        <h5 class="mt-3" id="vote{{ $c->id }}">{{ $c->suara }} Suara</h5>
                                     </div>
                                 </div>
                             </div>
@@ -108,28 +108,21 @@
                 @endforeach
 
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Hasil Voting</h4>
-                </div>
-                <div class="card-body">
-                    <div id="voting"></div>
-                </div>
-            </div>
         </div>
     </section>
     <script src="{{ asset('assets/js/pages/apexcharts.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script>
+        var chart = new ApexCharts(document.querySelector("#voting"), options);
         var options = {
             series: [
-                @foreach ($kandidat as $k)
-                    {{ $k->suara }},
+                @foreach ($calons as $c)
+                    {{ $c->suara }},
                 @endforeach
             ],
             labels: [
-                @foreach ($kandidat as $k)
-                    '{{ $k->nama_ketua }} & {{ $k->nama_wakil }}',
+                @foreach ($calons as $c)
+                    '{{ $c->nama_ketua }} & {{ $c->nama_wakil }}',
                 @endforeach
             ],
             colors: ["#435ebe", "#55c6e8", "#FEB139", "#EB1D36"],
@@ -149,30 +142,8 @@
                 }
             },
         };
-
-        var chart = new ApexCharts(document.querySelector("#voting"), options);
         chart.render();
 
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.totalSuara') }}',
-                success: function(data) {
-                    @foreach ($kandidat as $k)
-                        $('#vote{{ $k->id }}').html(data[{{ $k->id - 1 }}].suara +
-                            ' Suara');
-                    @endforeach
-
-                    chart.updateSeries([
-                        @foreach ($kandidat as $k)
-                            data[{{ $k->id - 1 }}].suara,
-                        @endforeach
-                    ]);
-
-                }
-            });
-        }, 1000);
 
         const number = [0, 1, 2, 3]
 

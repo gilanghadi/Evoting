@@ -9,6 +9,7 @@ use App\Models\Voting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use Nette\Schema\Expect;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,8 @@ class AdminController extends Controller
         $totalKandidat = Calons::count();
         $jumlahPemilih = User::where('role', User::ROLE_USER)->count();
         $pemilihTerkini = Voting::orderBy('created_at', 'desc')->limit(4)->get();
-        $kandidat = Calons::all();
+        $sudahMemilih = User::where('voting', '1')->count();
+        $calons = Calons::all();
         $number = [
             ['index' => 0],
             ['index' => 1],
@@ -30,7 +32,8 @@ class AdminController extends Controller
             'totalKandidat' => $totalKandidat,
             'jumlahPemilih' => $jumlahPemilih,
             'pemilihTerkini' => $pemilihTerkini,
-            'kandidat' => $kandidat,
+            'sudahMemilih' => $sudahMemilih,
+            'calons' => $calons,
             'number' => $number
         ]);
     }
@@ -142,7 +145,7 @@ class AdminController extends Controller
         Calons::where('id', $id_calon)->decrement('suara');
 
         User::where('id', $id)->update([
-            'voting' => "false",
+            'voting' => "0",
             'id_calon' => NULL
         ]);
 
