@@ -29,6 +29,8 @@
                         <input id="password" type="password"
                             class="form-control form-control-xl @error('password') is-invalid @enderror" name="password"
                             autocomplete="current-password" placeholder="Password">
+                        <i class="bi-eye-slash position-absolute top-0 end-0 py-2 pe-3 fs-4" id="toggle"
+                            style="cursor: pointer"></i>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,4 +53,22 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        const password = document.querySelector('#password')
+        const toggle = document.querySelector('#toggle')
+
+        toggle.addEventListener('click', function() {
+            const type = password.getAttribute('type')
+            if (type === 'password') {
+                password.setAttribute('type', 'text')
+                toggle.classList.remove('bi-eye-slash')
+                toggle.classList.add('bi-eye')
+            } else {
+                password.setAttribute('type', 'password')
+                toggle.classList.remove('bi-eye')
+                toggle.classList.add('bi-eye-slash')
+            }
+        })
+    </script>
 @endsection

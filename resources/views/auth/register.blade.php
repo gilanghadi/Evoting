@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+
+@section('title', 'Tambahkan Pemilih')
+
+
 @section('content')
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible show fade">
@@ -20,28 +24,18 @@
                 <div>
                     <button data-bs-toggle="modal" data-bs-target="#importExcel" class="btn btn-primary">IMPORT
                         EXCEL</button>
-                    <a href="{{ route('admin.downloadTemplate') }}" class="btn icon icon-left btn-success"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-download">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Dowload Template</a>
                 </div>
                 <!-- Import Excel -->
                 <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aaria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <form method="post" action="{{ route('admin.importPemilih') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                                 </div>
                                 <div class="modal-body">
-
-                                    {{ csrf_field() }}
 
                                     <label>Pilih file excel</label>
                                     <div class="form-group">
@@ -81,7 +75,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="nama-wakil">{{ __('Nis') }}</label>
-                                        <input id="nis" type="text"
+                                        <input id="nis" type="number"
                                             class="form-control @error('nis') is-invalid @enderror" name="nis"
                                             value="{{ old('nis') }}" required autocomplete="nis">
 

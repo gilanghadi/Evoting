@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'nis' => ['required', 'string', 'max:255', 'unique:users'],
             'kelas' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:5'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     }
 

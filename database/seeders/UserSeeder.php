@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -16,13 +17,18 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        $user = new User();
-        $user->nama = 'Gilang Hadi';
-        $user->nis = '206883';        
-        $user->kelas = ' ';
-        $user->role = 'admin';
-        $user->password = bcrypt('12345');
-        $user->voting = 2;
-        $user->save();
+        $user = [
+            [
+                'nama' => 'Gilang Hadi',
+                'nis' => '206883',
+                'kelas' => ' ',
+                'role' => 'admin',
+                'password' => Hash::make('12345'),
+                'voting' => 2
+            ]
+        ];
+        foreach ($user as $user) {
+            User::create($user);
+        }
     }
 }

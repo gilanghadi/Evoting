@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class VotingController extends Controller
 {
-    //
-    public function vote(Request $request, $id)
+  //
+  public function vote(Request $request, $id)
   {
 
     $user = User::where('id', $request->user()->id)->value('voting');

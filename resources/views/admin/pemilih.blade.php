@@ -48,7 +48,7 @@
                                     </td>
                                     <td>
                                         @if ($p->id_calon == null)
-                                            <span>-</span>
+                                            <span class="badge bg-danger">Belum Voting</span>
                                         @endif
                                         @if ($p->id_calon != null)
                                             {{ $p->calons->nama_ketua }} & {{ $p->calons->nama_wakil }}

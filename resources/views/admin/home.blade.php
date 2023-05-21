@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Jumlah Pemilih</h6>
+                                    <h6 class="text-gray-600 font-semibold">Jumlah Pemilih</h6>
                                     <h6 class="font-extrabold mb-0">{{ $jumlahPemilih }}</h6>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Sudah Memilih</h6>
+                                    <h6 class="text-gray-600 font-semibold">Sudah Memilih</h6>
                                     <h6 class="font-extrabold mb-0" id="sudahmemilih">{{ $sudahMemilih }}</h6>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Jumlah Kandidat</h6>
+                                    <h6 class="text-gray-600 font-semibold">Jumlah Kandidat</h6>
                                     <h6 class="font-extrabold mb-0">{{ $totalKandidat }}</h6>
                                 </div>
                             </div>
@@ -93,15 +93,15 @@
                     <h4>Pemilih Terkini</h4>
                 </div>
 
-                @foreach ($number as $num)
+                @foreach ($pemilihTerkini as $pemilih)
                     <div class="card-content pb-4">
                         <div class="recent-message d-flex px-4 py-3">
                             <div class="avatar avatar-lg">
                                 <img src="{{ asset('assets/images/faces/1.jpg') }}">
                             </div>
                             <div class="name ms-4">
-                                <h5 class="mb-1" id="namapemlih{{ $num['index'] }}"></h5>
-                                <h6 class="text-muted mb-0" id="kelaspemilih{{ $num['index'] }}"></h6>
+                                <h5 class="mb-1 text-white">{{ $pemilih->user->nama }}</h5>
+                                <h6 class=" mb-0 text-gray-600">{{ $pemilih->user->kelas }}</h6>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
     </section>
     <script src="{{ asset('assets/js/pages/apexcharts.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script>
+    {{-- <script>
         var chart = new ApexCharts(document.querySelector("#voting"), options);
         var options = {
             series: [
@@ -174,5 +174,5 @@
                 }
             });
         }, 1000);
-    </script>
+    </script> --}}
 @endsection

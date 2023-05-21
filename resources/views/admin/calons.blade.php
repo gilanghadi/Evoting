@@ -49,7 +49,7 @@
                                             @error('password') is-invalid @enderror required>
 
                                         @error('foto_calon')
-                                            <p class="text-danger">*format gambar harus jpg!</p>
+                                            <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                     <td nowrap="nowrap">{{ $k->nama_wakil }}</td>
                                     <td nowrap="nowrap">
                                         <a href="{{ url('/foto_calon/' . $k->foto_calon) }}" data-lightbox="example-1">
-                                            <img id="zoom-img" class="img-fluid mb-3"
+                                            <img id="zoom-img" class="img-fluid mb-3 rounded"
                                                 src="{{ url('/foto_calon/' . $k->foto_calon) }}" width="50">
                                         </a>
                                     </td>

@@ -14,6 +14,10 @@
                             {{ csrf_field() }}
                             <div class="form-body">
                                 <div class="row">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <img id="zoom-img" class="img-fluid mb-3 rounded"
+                                            src="{{ url('/foto_calon/' . $c->foto_calon) }}" width="200">
+                                    </div>
                                     <input type="hidden" name="id" value="{{ $c->id }}">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -39,6 +43,17 @@
                                         <div class="form-group">
                                             <label for="misi">Misi</label>
                                             <textarea class="form-control" id="misi" rows="3" name="misi" required>{{ $c->misi }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="foto-calon">Foto Calon</label>
+                                            <input class="form-control" type="file" id="formFile" name="foto_calon"
+                                                @error('password') is-invalid @enderror required>
+
+                                            @error('foto_calon')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">

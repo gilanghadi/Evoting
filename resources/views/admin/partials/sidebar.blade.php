@@ -29,6 +29,12 @@
                         <span>Tambah Pemilih</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->routeIs('admin.addAdmin') ? 'active' : '' }}">
+                    <a href="{{ route('admin.addAdmin') }}" class='sidebar-link'>
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>Tambah Admin</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ request()->routeIs('admin.pemilih') ? 'active' : '' }}">
                     <a href="{{ route('admin.pemilih') }}" class='sidebar-link'>
                         <i class="bi bi-people-fill"></i>

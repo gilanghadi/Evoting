@@ -8,8 +8,11 @@ use App\Models\User;
 use App\Models\Voting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Nette\Schema\Expect;
+
+use function Ramsey\Uuid\v1;
 
 class AdminController extends Controller
 {
@@ -21,20 +24,13 @@ class AdminController extends Controller
         $pemilihTerkini = Voting::orderBy('created_at', 'desc')->limit(4)->get();
         $sudahMemilih = User::where('voting', '1')->count();
         $calons = Calons::all();
-        $number = [
-            ['index' => 0],
-            ['index' => 1],
-            ['index' => 2],
-            ['index' => 3]
-        ];
-
+        $pemilihTerkini = Voting::with(['user'])->orderBy('created_at', 'desc')->limit(4)->get();
         return view('admin.home', [
             'totalKandidat' => $totalKandidat,
             'jumlahPemilih' => $jumlahPemilih,
             'pemilihTerkini' => $pemilihTerkini,
             'sudahMemilih' => $sudahMemilih,
             'calons' => $calons,
-            'number' => $number
         ]);
     }
 
@@ -48,12 +44,6 @@ class AdminController extends Controller
         Excel::import(new ImportPemilih, $request->file('file'));
 
         return redirect()->back()->with('success', 'Pemilih berhasil di import');
-    }
-
-    public function downloadTemplate()
-    {
-        $file = public_path('template_excel\import_pemilih.xlsx');
-        return response()->download($file);
     }
 
     public function calon()
@@ -72,7 +62,7 @@ class AdminController extends Controller
         $this->validate($request, [
             'nama_ketua' => 'required',
             'nama_wakil' => 'required',
-            'foto_calon' => 'required | image | mimes:jpg',
+            'foto_calon' => 'required | image | mimes:jpg,jpeg',
             'visi' => 'required',
             'misi' => 'required',
         ]);
@@ -121,9 +111,20 @@ class AdminController extends Controller
             'misi' => 'required',
         ]);
 
+        $calon = Calons::all();
+        if ($request->hasFile('foto_calon')) {
+            if (file_exists('foto_calon')) {
+                File::delete('foto_calon');
+            }
+            $image = $request->file('foto_calon');
+            $nama_foto = $calon->count() + 1 . '.jpg';
+            $tujuan_upload = 'foto_calon';
+            $image->move($tujuan_upload, $nama_foto);
+        }
         Calons::where('id', $id)->update([
             'nama_ketua' => $request->nama_ketua,
             'nama_wakil' => $request->nama_wakil,
+            'foto_calon' => $nama_foto,
             'visi' => $request->visi,
             'misi' => $request->misi,
         ]);
@@ -156,5 +157,29 @@ class AdminController extends Controller
     {
         User::where('id', $id)->delete();
         return redirect()->back()->with('deleted', 'Pemilih Berhasil Dihapus');
+    }
+
+    public function addAdmin()
+    {
+        return view('admin.addAdmin');
+    }
+
+    public function addAdminPost(Request $request)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'nis' => 'required',
+            'password' => 'required',
+        ]);
+
+        User::create([
+            'nama' => $request->nama,
+            'nis' => $request->nis,
+            'kelas' => ' ',
+            'voting' => 2,
+            'role' => 'admin',
+            'password' => Hash::make($request->password)
+        ]);
+        return redirect()->route('admin.addAdmin')->with('success', 'Menambahkan Admin Berhasil');
     }
 }

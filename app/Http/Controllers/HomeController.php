@@ -27,4 +27,8 @@ class HomeController extends Controller
         $calons = Calons::all();
         return view('home', compact('calons'));
     }
+    public function index2()
+    {
+        return view('succes');
+    }
 }

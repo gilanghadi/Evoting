@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer clearfix mb-0 text-muted">
+    <div class="footer clearfix mb-0 text-gray-600">
         <div class="float-start">
             <p>{{ date('Y') }} &copy; Gamvote</p>
         </div>
