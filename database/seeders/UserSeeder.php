@@ -20,10 +20,10 @@ class UserSeeder extends Seeder
         $user = [
             [
                 'nama' => 'Gilang Hadi',
-                'nis' => '206883',
+                'nis' => '123412',
                 'kelas' => ' ',
                 'role' => 'admin',
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345678'),
                 'voting' => 2
             ]
         ];
