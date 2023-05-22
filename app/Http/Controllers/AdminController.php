@@ -177,7 +177,7 @@ class AdminController extends Controller
             'nis' => $request->nis,
             'kelas' => ' ',
             'voting' => 2,
-            'role' => 'admin',
+            'role' => User::ROLE_ADMIN,
             'password' => Hash::make($request->password)
         ]);
         return redirect()->route('admin.addAdmin')->with('success', 'Menambahkan Admin Berhasil');
