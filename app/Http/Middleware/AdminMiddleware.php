@@ -17,13 +17,13 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
-            if(Auth::user()->role == 'admin'){
+        if (Auth::check()) {
+            if (Auth::user()->role == 'admin') {
                 return $next($request);
-            }else{
-                return redirect('/home')->with('message', 'Access Denied');
+            } else {
+                return abort(401);
             }
-        }else {
+        } else {
             return redirect('/login')->with('status', 'please login first');
         }
     }

@@ -41,9 +41,12 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if (Auth()->user()->role == 'admin') {
+        if (Auth::check() && Auth::user()->role === "admin") {
             $request->session()->regenerateToken();
             return redirect()->route('admin.home');
+        } else {
+            $request->session()->regenerateToken();
+            return redirect()->intended('/');
         }
     }
 }
