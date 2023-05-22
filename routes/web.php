@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VotingController;
 use App\Http\Controllers\Api\VotingController as ApiVotingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,12 @@ use App\Http\Controllers\HomeController;
 
 Auth::routes();
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/', HomeController::class . '@index')->name('home');
     Route::get('/vote/{id}', VotingController::class . '@vote')->name('vote');
 });
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/', AdminController::class . '@index')->name('admin.home');
     Route::get('/calon', AdminController::class . '@calon')->name('admin.calon');
     Route::post('/addCalon', AdminController::class . '@addCalon')->name('admin.addcalon');

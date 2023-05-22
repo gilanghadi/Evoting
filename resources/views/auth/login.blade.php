@@ -9,7 +9,7 @@
                 <img src="{{ asset('assets/images/voting.svg') }}" alt="vote" width="500" class="pe-4">
             </div>
             <div class="col-10 col-lg-6">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="post" action="{{ route('login') }}">
                     @csrf
 
                     <div class="form-group position-relative has-icon-left mb-4">
@@ -48,7 +48,7 @@
                             Keep me logged in
                         </label>
                     </div>
-                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                 </form>
             </div>
         </div>
