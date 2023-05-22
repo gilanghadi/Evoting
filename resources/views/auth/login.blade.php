@@ -9,7 +9,7 @@
                 <img src="{{ asset('assets/images/voting.svg') }}" alt="vote" width="500" class="pe-4">
             </div>
             <div class="col-10 col-lg-6">
-                <form method="post" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <div class="form-group position-relative has-icon-left mb-4">

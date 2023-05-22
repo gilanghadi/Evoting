@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
     /**
      * Create a new controller instance.
      *
@@ -41,12 +41,10 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if (Auth::check() && Auth::user()->role === "admin") {
-            $request->session()->regenerateToken();
-            return redirect()->route('admin.home');
+        if (Auth::user()->role == 'admin') {
+            return redirect('/admin');
         } else {
-            $request->session()->regenerateToken();
-            return redirect()->intended('/');
+            return redirect('/');
         }
     }
 }
