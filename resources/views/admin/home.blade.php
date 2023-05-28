@@ -108,71 +108,18 @@
                 @endforeach
 
             </div>
+            <div class="card pb-3">
+                <div class="card-header">
+                    <h4>Hasil Voting</h4>
+                </div>
+                {!! $chart->container() !!}
+            </div>
         </div>
     </section>
-    <script src="{{ asset('assets/js/pages/apexcharts.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    {{-- <script>
-        var chart = new ApexCharts(document.querySelector("#voting"), options);
-        var options = {
-            series: [
-                @foreach ($calons as $c)
-                    {{ $c->suara }},
-                @endforeach
-            ],
-            labels: [
-                @foreach ($calons as $c)
-                    '{{ $c->nama_ketua }} & {{ $c->nama_wakil }}',
-                @endforeach
-            ],
-            colors: ["#435ebe", "#55c6e8", "#FEB139", "#EB1D36"],
-            chart: {
-                type: "donut",
-                width: "100%",
-                height: "350px"
-            },
-            legend: {
-                position: "bottom"
-            },
-            plotOptions: {
-                pie: {
-                    donut: {
-                        size: "30%"
-                    }
-                }
-            },
-        };
-        chart.render();
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ $chart->cdn() }}"></script>
 
+    {{ $chart->script() }}
 
-        const number = [0, 1, 2, 3]
-
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.pemilihTerkini') }}',
-                success: function(data) {
-                    for (let el of number) {
-                        $('#namapemlih' + [el]).html(data[el].user.nama);
-                        $('#kelaspemilih' + [el]).html(data[el].user.kelas);
-                        if (el === 3) {
-                            break;
-                        }
-                    }
-                }
-            });
-        }, 1000);
-
-        setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '{{ route('api.sudahMemilih') }}',
-                success: function(data) {
-                    $('#sudahmemilih').html(data);
-                }
-            });
-        }, 1000);
-    </script> --}}
 @endsection
