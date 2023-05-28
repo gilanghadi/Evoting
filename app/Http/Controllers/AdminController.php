@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\VotingChart;
 use App\Models\Calons;
 use App\Models\ImportPemilih;
 use App\Models\User;
@@ -17,20 +18,20 @@ use function Ramsey\Uuid\v1;
 class AdminController extends Controller
 {
     //
-    public function index()
+    public function index(VotingChart $chart)
     {
         $totalKandidat = Calons::count();
         $jumlahPemilih = User::where('role', User::ROLE_USER)->count();
         $pemilihTerkini = Voting::orderBy('created_at', 'desc')->limit(4)->get();
         $sudahMemilih = User::where('voting', '1')->count();
         $calons = Calons::all();
-        $pemilihTerkini = Voting::with(['user'])->orderBy('created_at', 'desc')->limit(4)->get();
         return view('admin.home', [
             'totalKandidat' => $totalKandidat,
             'jumlahPemilih' => $jumlahPemilih,
             'pemilihTerkini' => $pemilihTerkini,
             'sudahMemilih' => $sudahMemilih,
             'calons' => $calons,
+            'chart' => $chart->build()
         ]);
     }
 
